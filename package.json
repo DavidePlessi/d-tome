@@ -1,0 +1,33 @@
+{
+  "name": "d-tome",
+  "version": "1.0.0",
+  "description": "d&d stuff",
+  "main": "index.js",
+  "author": "Davide Plessi",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node server",
+    "build:dev": "rollup -c -w --environment NODE_ENV:dev",
+    "install:pnpm": "pnpm install -f",
+    "upgrade": "ncu --upgrade && pnpm install"
+  },
+  "dependencies": {
+    "@eusoft/webapp-core": "^0.0.3",
+    "@eusoft/webapp-jsx": "^0.0.5",
+    "@rollup/plugin-json": "^6.0.0"
+  },
+  "devDependencies": {
+    "@eusoft/webapp-compiler-rollup": "^0.0.4",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "express": "4.18.2",
+    "npm-check-updates": "16.10.9",
+    "rollup": "^3.21.0",
+    "rollup-plugin-delete": "2.0.0",
+    "rollup-plugin-sass": "^1.12.19",
+    "rollup-plugin-sourcemaps": "0.6.3",
+    "tslib": "^2.5.0",
+    "typescript": "5.0.4"
+  }
+}
