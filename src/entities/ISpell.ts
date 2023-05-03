@@ -10,7 +10,7 @@ export default interface ISpell {
     savingThrow: string;
     hasRitual: boolean;
     hasConcentration: boolean;
-    classes?: string[];
+    classes?: string;
     range: string;
     components: string;
     duration: string;

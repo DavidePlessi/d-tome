@@ -15,12 +15,15 @@
   "dependencies": {
     "@eusoft/webapp-core": "^0.0.3",
     "@eusoft/webapp-jsx": "^0.0.5",
-    "@rollup/plugin-json": "^6.0.0"
+    "@rollup/plugin-json": "^6.0.0",
+    "rollup-plugin-scss": "^4.0.0"
   },
   "devDependencies": {
     "@eusoft/webapp-compiler-rollup": "^0.0.4",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.1",
     "express": "4.18.2",
     "npm-check-updates": "16.10.9",
     "rollup": "^3.21.0",
@@ -29,5 +32,9 @@
     "rollup-plugin-sourcemaps": "0.6.3",
     "tslib": "^2.5.0",
     "typescript": "5.0.4"
+  },
+  "resolutions": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.1"
   }
 }

@@ -1,20 +1,6 @@
 <t:template name="Index" xmlns:t="http://www.w3.org/1999/XSL/Transform">
-    <table>
-        <thead>
-            <tr>
-                <td>Nome</td>
-                <td>Livello</td>
-                <td>Classe</td>
-            </tr>
-        </thead>
-        <tbody>
-            <t:foreach src="$model.filteredSpells">
-                <tr>
-                    <td t:text="$model.name" />
-                    <td t:text="$model.level" />
-                    <td t:text="$model.classes" />
-                </tr>
-            </t:foreach>
-        </tbody>
-    </table>
+    <t:content src="$model.navbar"/>
+    <div class="page-container">
+        <t:content src="$model.spellList"/>
+    </div>
 </t:template>

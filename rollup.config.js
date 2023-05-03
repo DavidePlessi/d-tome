@@ -3,7 +3,7 @@ import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import webapp from "@eusoft/webapp-compiler-rollup";
-import sass from "rollup-plugin-sass";
+import scss from "rollup-plugin-scss";
 import path from "path";
 
 const outPath = "public/build";
@@ -23,7 +23,7 @@ export default [
     ],
     plugins: [
       webapp(),
-      sass(),
+      scss({ fileName: 'style.css' }),
       json(),
       resolve(),
       typescript(),

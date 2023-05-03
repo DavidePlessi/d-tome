@@ -19,7 +19,7 @@ class SpellStore {
             hasRitual: s.hasRitual.toLowerCase() === "si",
             hasConcentration: s.hasConcentration.toLowerCase() === "si",
             //@ts-ignore
-            classes: JSON.parse(s.categories).map(x => x.name.replace('Incantesimo da ', '') as string),
+            classes: JSON.parse(s.categories).map(x => x.name.replace('Incantesimo da ', '')).join(', '),
             range: s.range,
             components: s.components,
             duration: s.duration,
@@ -30,20 +30,24 @@ class SpellStore {
         return this;
     }
     public filterSpells(spells: ISpell[], filter: ISpellFilter) {
-        return this.spells.filter(spell => {
-            if (filter.query &&
-                !spell.name.toLowerCase().includes(filter.query.toLowerCase()) &&
-                !spell.originalName.toLowerCase().includes(filter.query.toLowerCase())
-            ) {
-                return false
+        return spells.filter(s => {
+            if(filter.query && filter.query.length > 0) {
+                if(s.name.toLowerCase().indexOf(filter.query.toLowerCase()) === -1 &&
+                    s.originalName.toLowerCase().indexOf(filter.query.toLowerCase()) === -1) {
+                    return false;
+                }
             }
-            if (filter.level && spell.level !== filter.level) {
-                return false
+            if(filter.level && filter.level.length > 0) {
+                if(s.level !== filter.level) {
+                    return false;
+                }
             }
-            if (filter.hasConcentration && !spell.hasConcentration) {
-                return false
+            if(filter.classes && filter.classes.length > 0) {
+                if(s.classes.toLowerCase().indexOf(filter.classes.toLowerCase()) === -1) {
+                    return false;
+                }
             }
-            return !(filter.components && !spell.components.includes(filter.components));
+            return true;
         })
     }
 }

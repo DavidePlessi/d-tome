@@ -1,0 +1,16 @@
+<t:template name="Table" xmlns:t="http://www.w3.org/1999/XSL/Transform">
+    <table class="table">
+        <thead>
+            <tr>
+                <t:foreach src="$model.columns">
+                    <td t:text="$model.label"/>
+                </t:foreach>
+            </tr>
+        </thead>
+        <tbody>
+            <t:foreach src="$model.rows">
+                <t:content src="$model.value"/>
+            </t:foreach>
+        </tbody>
+    </table>
+</t:template>

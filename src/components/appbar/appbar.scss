@@ -1,0 +1,16 @@
+.appbar {
+  height: 50px;
+  background-color: transparent;
+  z-index: 100;
+
+  .appbar__logo-container {
+    border-bottom-right-radius: 20px;
+    width: 80px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
+    box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
+  }
+  .appbar__logo {
+    width: 60px;
+  }
+}

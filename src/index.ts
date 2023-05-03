@@ -1,49 +1,38 @@
 import { template } from "@eusoft/webapp-core";
 import Index from "./index.html";
-import spellStore from "./stores/spellStore";
-import ISpell from "./entities/ISpell";
-import ISpellFilter from "./entities/ISpellFilter";
+import {Appbar} from "./components/appbar/appbar";
+import {SpellList} from "./pages/spell-list/spellList";
+import './index.scss';
 
 
 interface IIndexModelProps {
-    spells?: ISpell[];
-    filter?: ISpellFilter;
+    navbar: Appbar;
+    spellList: SpellList;
 }
 class IndexModel {
-    public spells: ISpell[] = [];
-    public filteredSpells: ISpell[] = [];
-    public filter: ISpellFilter;
-
-    public filterSpells() {
-        this.filteredSpells = this.spells.filter(spell => {
-            if (this.filter.query &&
-                !spell.name.toLowerCase().includes(this.filter.query.toLowerCase()) &&
-                !spell.originalName.toLowerCase().includes(this.filter.query.toLowerCase())
-            ) {
-                return false
-            }
-            if (this.filter.level && spell.level !== this.filter.level) {
-                return false
-            }
-            if (this.filter.hasConcentration && !spell.hasConcentration) {
-                return false
-            }
-            return !(this.filter.components && !spell.components.includes(this.filter.components));
-        })
-    }
+    public navbar: Appbar;
+    public spellList: SpellList
 
     constructor(props: IIndexModelProps) {
-        this.spells = props.spells || [];
-        this.filter = props.filter || {} as ISpellFilter;
-        this.filterSpells();
+        this.navbar = props.navbar;
+        this.spellList = props.spellList;
     }
 }
 
 
 async function runAsync() {
-    const model = new IndexModel({
-        spells: spellStore.spells
-    } as IIndexModelProps);
+    const navbar = new Appbar({
+        logo: 'http://3.bp.blogspot.com/-csueLM4N1_w/Ut4fZ0eMsgI/AAAAAAAAB28/fFR6wrg0IFM/s1600/icon_tome.png',
+        homeLink: '/',
+        template: 'Default'
+    })
+
+    const spellList = new SpellList({
+        template: 'Default'
+    })
+
+
+    const model = new IndexModel({navbar, spellList});
 
     template(document.body, Index, model);
 }
