@@ -5,6 +5,8 @@ import ISpellFilter from "../../entities/ISpellFilter";
 import spellStore from "../../stores/spellStore";
 import {ITableHeaderColumn, ITableProps, ITableRowData, Table} from "../../components/table/table";
 import './spellList.scss';
+import {ITextInputProps, TextInput} from "../../components/input/textInput/textInput";
+import {Button, IButtonProps} from "../../components/button/button";
 
 
 export const Templates = {
@@ -19,6 +21,13 @@ export class SpellList implements IViewComponent {
     public filter: ISpellFilter;
     public template: CatalogTemplate<this>;
     public table: Table;
+
+    public queryInput: TextInput;
+    public levelInput: TextInput;
+    public classesInput: TextInput;
+
+    public filterButton: Button;
+
 
     public applyFilter() {
         console.log(this.filter);
@@ -51,6 +60,35 @@ export class SpellList implements IViewComponent {
             level: '',
             classes: ''
         } as ISpellFilter;
+
+        this.queryInput = new TextInput({
+            id: 'query',
+            name: 'query',
+            label: 'Nome',
+            value: this.filter.query,
+            onChange: this.onFilterValueChange.bind(this)
+        } as ITextInputProps);
+
+        this.levelInput = new TextInput({
+            id: 'level',
+            name: 'level',
+            label: 'Livello',
+            value: this.filter.query,
+            onChange: this.onFilterValueChange.bind(this)
+        } as ITextInputProps);
+
+        this.classesInput = new TextInput({
+            id: 'classes',
+            name: 'classes',
+            label: 'Classi',
+            value: this.filter.query,
+            onChange: this.onFilterValueChange.bind(this)
+        } as ITextInputProps);
+
+        this.filterButton = new Button({
+            text: 'Filtra',
+            onClick: this.applyFilter.bind(this)
+        } as IButtonProps)
 
         this.applyFilter();
 

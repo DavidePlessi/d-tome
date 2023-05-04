@@ -1,0 +1,14 @@
+<t:template xmlns:t="urn:web-app" name="TextInput">
+    <div class="input__input-container">
+        <input type="text"
+               t:id="$model.id"
+               t:name="$model.name"
+               t:value="$model.value"
+               t:on-change="$model.innerOnChange(event)"
+        />
+        <label
+                t:for="$model.id"
+                t:text="$model.label"
+        ></label>
+    </div>
+</t:template>

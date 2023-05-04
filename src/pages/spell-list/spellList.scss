@@ -1,5 +1,5 @@
 .spell-list__table-container {
-    height: 70vh;
+    max-height: 70vh;
     overflow-y: auto;
 
     -webkit-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
@@ -14,15 +14,6 @@
     -webkit-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
     -moz-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
     box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
-
-
-    .spell-list__filter-form__input-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: 10px;
-        gap: 5px;
-    }
     .spell-list__filter-form__button-container {
         display: flex;
         justify-content: center;

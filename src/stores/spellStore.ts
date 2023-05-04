@@ -8,7 +8,7 @@ class SpellStore {
     public loadSpells() {
         this.spells = spells.map(s => ({
             index: s.index - 1,
-            name: s.name,
+            name: `${s.name} ${s.originalName}`,
             originalName: s.originalName.replaceAll('(', '').replaceAll(')', ''),
             link: s.link,
             school: s.school,

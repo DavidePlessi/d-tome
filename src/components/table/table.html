@@ -1,9 +1,9 @@
-<t:template name="Table" xmlns:t="http://www.w3.org/1999/XSL/Transform">
+<t:template name="Table" xmlns:t="urn:web-app">
     <table class="table">
         <thead>
             <tr>
                 <t:foreach src="$model.columns">
-                    <td t:text="$model.label"/>
+                    <td t:text="$model.label"></td>
                 </t:foreach>
             </tr>
         </thead>

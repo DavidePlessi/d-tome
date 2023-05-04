@@ -20,6 +20,6 @@ export class Appbar implements IViewComponent {
     constructor(props: IAppbarProps) {
         this.logo = props.logo || '';
         this.homeLink = props.homeLink || '/';
-        this.template = Templates[props.template || 'Default'] as any;
+        this.template = Templates[props.template || 'Default'];
     }
 }
