@@ -20,6 +20,7 @@ export interface ISpellListProps {
 export class SpellList implements IViewComponent {
     public filter: ISpellFilter;
     public template: CatalogTemplate<this>;
+
     public table: Table;
 
     public queryInput: TextInput;
