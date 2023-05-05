@@ -1,9 +1,8 @@
-import {CatalogTemplate, IViewComponent} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import SpellListTable from "./spellListTable.html";
-import ISpell from "../../entities/ISpell";
 import ISpellFilter from "../../entities/ISpellFilter";
 import spellStore from "../../stores/spellStore";
-import {ITableHeaderColumn, ITableProps, ITableRowData, Table} from "../../components/table/table";
+import {ITableHeaderColumn, ITableProps, Table} from "../../components/table/table";
 import './spellList.scss';
 import {ITextInputProps, TextInput} from "../../components/input/textInput/textInput";
 import {Button, IButtonProps} from "../../components/button/button";
@@ -18,7 +17,7 @@ export interface ISpellListProps {
     template?: keyof typeof Templates;
 }
 
-export class SpellList implements IViewComponent {
+export class SpellList implements ITemplateProvider {
     public filter: ISpellFilter;
     public template: CatalogTemplate<this>;
 
@@ -42,10 +41,9 @@ export class SpellList implements IViewComponent {
         this.table.updateTableRows(result);
     }
 
-    public onFilterValueChange(e: Event) {
-        //TODO: verificare onchange value
-        // const target = e.target as HTMLInputElement;
-        // this.filter[target.name as keyof ISpellFilter] = target.value;
+    public onFilterValueChange(item: TextInput) {
+        
+        this.filter[item.name as keyof ISpellFilter] = item.value;
 
         if(this.applyFilterTimeout)
             clearTimeout(this.applyFilterTimeout);
@@ -79,7 +77,7 @@ export class SpellList implements IViewComponent {
             name: 'query',
             label: 'Nome',
             value: this.filter.query,
-            onChange: this.onFilterValueChange.bind(this)
+            onChange: () => this.onFilterValueChange(this.queryInput)
         } as ITextInputProps);
 
         this.levelInput = new TextInput({
@@ -87,7 +85,7 @@ export class SpellList implements IViewComponent {
             name: 'level',
             label: 'Livello',
             value: this.filter.query,
-            onChange: this.onFilterValueChange.bind(this)
+            onChange: () => this.onFilterValueChange(this.levelInput)
         } as ITextInputProps);
 
         this.classesInput = new TextInput({
@@ -95,7 +93,7 @@ export class SpellList implements IViewComponent {
             name: 'classes',
             label: 'Classi',
             value: this.filter.query,
-            onChange: this.onFilterValueChange.bind(this)
+            onChange: () => this.onFilterValueChange(this.classesInput)
         } as ITextInputProps);
 
         this.filterButton = new Button({

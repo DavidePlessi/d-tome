@@ -1,4 +1,4 @@
-import {CatalogTemplate, IViewComponent} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider } from "@eusoft/webapp-core";
 import DraggableCardTemplate from './draggableCard.html';
 import './draggableCard.scss';
 import {Template} from "@eusoft/webapp-jsx";
@@ -45,11 +45,11 @@ function dragElement(element: HTMLElement) {
 const Templates = {
     'Default': DraggableCardTemplate,
     'DefaultJSX': (
-        <Template name={"DraggableCardJSX"}>
+        <Template name="DraggableCardJSX">
             <div className="draggable-card" on-load={(m: DraggableCard, e: Event) => m.innerOnLoad(e)}>
                 <div className="draggable-card__header">
-                    <div className="draggable-card__title">
-                        {(m: DraggableCard)=> m.title}
+                    <div className="draggable-card__title" text={(m: DraggableCard)=> m.title}>
+                        
                     </div>
                     <div className="draggable-card__actions">
                         <button
@@ -60,8 +60,7 @@ const Templates = {
                     </div>
                 </div>
                 <div className="draggable-card__content">
-                    <div className="draggable-card__content-text">
-                        {(m: DraggableCard)=> m.content}
+                    <div className="draggable-card__content-text" text={(m: DraggableCard)=> m.content}>
                     </div>
                 </div>
             </div>
@@ -76,7 +75,7 @@ export interface IDraggableCardProps {
     onClose?: () => void;
 }
 
-export class DraggableCard implements IViewComponent {
+export class DraggableCard implements ITemplateProvider {
     public template: CatalogTemplate<this>;
     public title: string;
     public content: string;
@@ -99,7 +98,7 @@ export class DraggableCard implements IViewComponent {
     }
 
     constructor(props: IDraggableCardProps) {
-        this.template = Templates[props.template || 'Default'] as CatalogTemplate<this>;
+        this.template = Templates[props.template || 'DefaultJSX'] as CatalogTemplate<this>;
 
         this.title = props.title;
         this.content = props.content;

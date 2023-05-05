@@ -1,4 +1,4 @@
-import {CatalogTemplate, IViewComponent} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import AppbarTemplate from "./appbar.html";
 import './appbar.scss';
 
@@ -12,7 +12,7 @@ export interface IAppbarProps {
     template?: keyof typeof Templates;
 }
 
-export class Appbar implements IViewComponent {
+export class Appbar implements ITemplateProvider {
     public logo: string;
     public homeLink: string;
     public template: CatalogTemplate<this>

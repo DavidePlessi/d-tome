@@ -9,24 +9,24 @@
   "scripts": {
     "start": "node server",
     "build:dev": "rollup -c -w --environment NODE_ENV:dev",
-    "install:pnpm": "pnpm install -f",
-    "upgrade": "ncu --upgrade && pnpm install"
+    "install:pnpm": "pnpm install",
+    "upgrade": "pnpm up -latest"
   },
   "dependencies": {
-    "@eusoft/webapp-core": "^0.0.8",
-    "@eusoft/webapp-jsx": "^0.0.11",
+    "@eusoft/webapp-core": "^0.0.14",
+    "@eusoft/webapp-jsx": "^0.0.17",
     "@rollup/plugin-json": "^6.0.0",
     "rollup-plugin-scss": "^4.0.0"
   },
   "devDependencies": {
-    "@eusoft/webapp-compiler-rollup": "^0.0.9",
+    "@eusoft/webapp-compiler-rollup": "^0.0.15",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
+    "@types/react": "18.2.5",
+    "@types/react-dom": "18.2.3",
     "express": "4.18.2",
     "npm-check-updates": "16.10.9",
-    "rollup": "^3.21.0",
+    "rollup": "^3.21.5",
     "rollup-plugin-delete": "2.0.0",
     "rollup-plugin-sass": "^1.12.19",
     "rollup-plugin-sourcemaps": "0.6.3",

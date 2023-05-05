@@ -1,4 +1,4 @@
-import {CatalogTemplate, IViewComponent} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import TableRowTemplate from './tableRow.html';
 import './tableRow.scss';
 
@@ -13,7 +13,7 @@ export interface ITableRowProps {
 }
 
 
-export class TableRow implements IViewComponent {
+export class TableRow implements ITemplateProvider {
     public columns: {value: string}[];
     public template: CatalogTemplate<this>;
 

@@ -1,4 +1,4 @@
-import {CatalogTemplate, IViewComponent} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import ButtonTemplate from "./button.html";
 import './button.scss';
 import getRandomId from "../../utils/getRandomId";
@@ -15,7 +15,7 @@ export interface IButtonProps {
     template?: keyof typeof Templates;
 }
 
-export class Button implements IViewComponent {
+export class Button implements ITemplateProvider {
     public text: string;
     public type: string;
     public id: string;

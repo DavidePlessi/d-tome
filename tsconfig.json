@@ -10,8 +10,7 @@
     "incremental": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "jsxFactory": "__createElement",
-    "jsx": "react"
+    "jsx": "preserve"
   },
   "include": [
     "src"
