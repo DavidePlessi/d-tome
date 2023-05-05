@@ -11,7 +11,7 @@ export interface ITextInputProps {
     id?: string;
     name?: string;
     value: string;
-    onChange: (e: Event) => void;
+    onChange?: (e: Event) => void;
     label?: string;
     template?: keyof typeof Templates;
 }
@@ -28,13 +28,13 @@ export class TextInput implements IViewComponent {
         const target = e.target as HTMLInputElement;
         const value = target.value;
         if(value && value.length > 0) {
-            console.log('has value');
             (e.target as HTMLInputElement).classList.add('has-value');
         } else {
-            console.log('not has value');
             (e.target as HTMLInputElement).classList.remove('has-value');
         }
-        this.onChange(e);
+
+        if(this.onChange)
+            this.onChange(e);
     }
 
     constructor(props: ITextInputProps) {

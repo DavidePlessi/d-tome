@@ -7,6 +7,7 @@ import {ITableHeaderColumn, ITableProps, ITableRowData, Table} from "../../compo
 import './spellList.scss';
 import {ITextInputProps, TextInput} from "../../components/input/textInput/textInput";
 import {Button, IButtonProps} from "../../components/button/button";
+import {DraggableCard, IDraggableCardProps} from "../../components/draggableCard/draggableCard";
 
 
 export const Templates = {
@@ -29,18 +30,29 @@ export class SpellList implements IViewComponent {
 
     public filterButton: Button;
 
+    public draggableCard: DraggableCard;
 
-    public applyFilter() {
-        console.log(this.filter);
+    public applyFilterTimeout: any;
+
+
+    public applyFilter(event?: Event) {
+        if(event)
+            event.preventDefault();
         const result = spellStore.filterSpells(spellStore.spells, this.filter);
-        console.log("Filter Result: " + result.length);
         this.table.updateTableRows(result);
-        console.log("Applied Result: " + this.table.rows.length);
     }
 
     public onFilterValueChange(e: Event) {
-        const target = e.target as HTMLInputElement;
-        this.filter[target.name as keyof ISpellFilter] = target.value;
+        //TODO: verificare onchange value
+        // const target = e.target as HTMLInputElement;
+        // this.filter[target.name as keyof ISpellFilter] = target.value;
+
+        if(this.applyFilterTimeout)
+            clearTimeout(this.applyFilterTimeout);
+
+        this.applyFilterTimeout = setTimeout(() => {
+            this.applyFilter();
+        }, 500)
     }
 
     constructor(props: ISpellListProps) {
@@ -88,8 +100,14 @@ export class SpellList implements IViewComponent {
 
         this.filterButton = new Button({
             text: 'Filtra',
+            type: 'submit',
             onClick: this.applyFilter.bind(this)
         } as IButtonProps)
+
+        this.draggableCard = new DraggableCard({
+            title: 'Draggable Card',
+            content: 'Draggable Card Content'
+        } as IDraggableCardProps);
 
         this.applyFilter();
 

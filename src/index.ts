@@ -1,4 +1,4 @@
-import { template } from "@eusoft/webapp-core";
+import { mount } from "@eusoft/webapp-core";
 import Index from "./index.html";
 import {Appbar} from "./components/appbar/appbar";
 import {SpellList} from "./pages/spell-list/spellList";
@@ -34,7 +34,7 @@ async function runAsync() {
 
     const model = new IndexModel({navbar, spellList});
 
-    template(document.body, Index, model);
+    mount(document.body, Index, model);
 }
 
 window.addEventListener("load", runAsync);

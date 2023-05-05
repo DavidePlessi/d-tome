@@ -13,13 +13,13 @@
     "upgrade": "ncu --upgrade && pnpm install"
   },
   "dependencies": {
-    "@eusoft/webapp-core": "^0.0.7",
-    "@eusoft/webapp-jsx": "^0.0.10",
+    "@eusoft/webapp-core": "^0.0.8",
+    "@eusoft/webapp-jsx": "^0.0.11",
     "@rollup/plugin-json": "^6.0.0",
     "rollup-plugin-scss": "^4.0.0"
   },
   "devDependencies": {
-    "@eusoft/webapp-compiler-rollup": "^0.0.8",
+    "@eusoft/webapp-compiler-rollup": "^0.0.9",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/react": "18.2.0",

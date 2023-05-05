@@ -6,19 +6,31 @@
     -moz-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
     box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
 }
-.spell-list__filter-form {
+.spell-list__filter-container {
     background-color: rgba(245, 245, 245, 0.9);
     padding: 25px;
-    display: flex;
-    justify-content: center;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
     -moz-box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
     box-shadow: 0px 0px 5px 0px rgba(244, 67, 54,1);
-    .spell-list__filter-form__button-container {
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+    .spell-list__filter-form {
+        gap: 10px;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+    }
+    .spell-list__button-container {
+        width: 100%;
         display: flex;
         justify-content: center;
         margin-top: 10px;
     }
-    margin-bottom: 10px;
-    margin-top: 10px;
+
 }
