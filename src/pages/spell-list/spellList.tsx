@@ -1,5 +1,4 @@
-import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
-import SpellListTable from "./spellListTable.html";
+import {CatalogTemplate, ITemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import ISpellFilter from "../../entities/ISpellFilter";
 import spellStore from "../../stores/spellStore";
 import {ITableHeaderColumn, ITableProps, Table} from "../../components/table/table";
@@ -9,10 +8,29 @@ import {Button, IButtonProps} from "../../components/button/button";
 import {DraggableCard, IDraggableCardProps} from "../../components/draggableCard/draggableCard";
 import ISpell from "../../entities/ISpell";
 import * as _ from "lodash";
+import {Content, Foreach, If, Template} from "@eusoft/webapp-jsx";
 
 
 export const Templates = {
-    Default: SpellListTable
+    Default: (
+        <Template name="SpellListTable">
+            {/*// @ts-ignore*/}
+            <form className="spell-list__filter-container" on-submit={(m: SpellList, e: Event) => m.applyFilter(e)}>
+                <div className="spell-list__filter-form">
+                    <Content src={(m: SpellList) => m.queryInput}/>
+                    <Content src={(m: SpellList) => m.levelInput}/>
+                    <Content src={(m: SpellList) => m.classesInput}/>
+                </div>
+
+            </form>
+            <div className="spell-list__table-container">
+                <Content src={(m: SpellList) => m.table}/>
+            </div>
+            <Foreach src={(m: SpellList) => m.draggableCards}>
+                <Content src={(m: DraggableCard) => m}/>
+            </Foreach>
+        </Template>
+    ) as ITemplate<SpellList>
 }
 
 export interface ISpellListProps {
