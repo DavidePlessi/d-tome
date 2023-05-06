@@ -8,6 +8,7 @@ import {ITextInputProps, TextInput} from "../../components/input/textInput/textI
 import {Button, IButtonProps} from "../../components/button/button";
 import {DraggableCard, IDraggableCardProps} from "../../components/draggableCard/draggableCard";
 import ISpell from "../../entities/ISpell";
+import * as _ from "lodash";
 
 
 export const Templates = {
@@ -38,7 +39,17 @@ export class SpellList implements ITemplateProvider {
     public applyFilter(event?: Event) {
         if(event)
             event.preventDefault();
-        const result = spellStore.filterSpells(spellStore.spells, this.filter);
+        let result = spellStore.filterSpells(spellStore.spells, this.filter);
+
+        if(this.table.activeSorts.length > 0) {
+            result = _.orderBy(
+                result,
+                this.table.activeSorts.map(x => x.key),
+                this.table.activeSorts.map(x => x.sort),
+            );
+        }
+
+
         this.table.updateTableRows(result);
     }
 
@@ -52,6 +63,10 @@ export class SpellList implements ITemplateProvider {
         this.applyFilterTimeout = setTimeout(() => {
             this.applyFilter();
         }, 500)
+    }
+
+    public onSort(e: Event, column: ITableHeaderColumn) {
+        this.applyFilter()
     }
 
     public onCloseCard(e: Event, id: string) {
@@ -97,9 +112,9 @@ export class SpellList implements ITemplateProvider {
 
         this.table = new Table({
             columns: [
-                {label: 'Nome', key: 'name'},
-                {label: 'Livello', key: 'level'},
-                {label: 'Classi', key: 'classes'}
+                {label: 'Nome', key: 'name', onSort: this.onSort.bind(this), currentSort: "none"},
+                {label: 'Livello', key: 'level', onSort: this.onSort.bind(this), currentSort: "none"},
+                {label: 'Classi', key: 'classes', onSort: this.onSort.bind(this), currentSort: "none"}
             ] as ITableHeaderColumn[],
             rowsData: spellStore.spells,
             tableRowTemplate: 'Default',

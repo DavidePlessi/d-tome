@@ -6,7 +6,6 @@
   font-size: 14px;
   color: #333;
   text-align: left;
-
   th,
   td {
     padding: 8px;
@@ -37,6 +36,16 @@
   thead {
     position: sticky;
     top: 0;
+
+    .table__sort-icon {
+      cursor: pointer;
+      margin: 7px;
+      font-size: 1rem;
+      &:hover {
+        color: #f44336;
+      }
+    }
+
     tr {
       td {
         border-top: 1px solid #ddd;

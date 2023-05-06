@@ -15,7 +15,10 @@
   "dependencies": {
     "@eusoft/webapp-core": "^0.0.17",
     "@eusoft/webapp-jsx": "^0.0.20",
+    "@rollup/plugin-commonjs": "^24.1.0",
     "@rollup/plugin-json": "^6.0.0",
+    "@types/lodash": "^4.14.194",
+    "lodash": "^4.17.21",
     "rollup-plugin-scss": "^4.0.0"
   },
   "devDependencies": {
