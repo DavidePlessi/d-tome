@@ -74,6 +74,7 @@ export class SpellList implements ITemplateProvider {
     public openCard(e: Event, id: string) {
         const spell = spellStore.spells.find(x => x.id === id);
 
+
         if(!spell) return;
 
         if(this.draggableCards.find(x => x.title === spell.name)) return;
@@ -83,6 +84,10 @@ export class SpellList implements ITemplateProvider {
                 onClose: this.onCloseCard.bind(this),
                 title: spell.name,
                 content: this.getSpellDescription(spell),
+                startPosition: {
+                    x: (e as MouseEvent).clientX,
+                    y: (e as MouseEvent).clientY,
+                }
             } as IDraggableCardProps)
         )
     }

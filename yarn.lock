@@ -109,38 +109,38 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@eusoft/webapp-compiler-rollup@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@eusoft/webapp-compiler-rollup/-/webapp-compiler-rollup-0.0.17.tgz#eac4d33669b13a64f7e719a4828db258287f67b9"
-  integrity sha512-bM54XLhZ3Hr9tuXJwx2X7N9ok3D8l1Z0+N+esRBn8DviwUzYsjpOQgTrCwMUrZQFAgF+dR/kbnhtRgnxmNtiTQ==
+"@eusoft/webapp-compiler-rollup@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@eusoft/webapp-compiler-rollup/-/webapp-compiler-rollup-0.0.18.tgz#b403502faad55adfcd5ac1f1ce2b0bddfa6ceda0"
+  integrity sha512-Mr2JKYf8iiiu+79A+u4e++X8W3rrS1pInsYVmsihhaxKVZ3NkQ4IafkixceqDPUcTQHvVuwscWaY8/dz9txWYw==
   dependencies:
-    "@eusoft/webapp-compiler" "^0.0.17"
+    "@eusoft/webapp-compiler" "^0.0.18"
     magic-string "0.30.0"
 
-"@eusoft/webapp-compiler@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@eusoft/webapp-compiler/-/webapp-compiler-0.0.17.tgz#5f9b1d462aa75c2efb7c397b0ce67fb26383dd56"
-  integrity sha512-LFXOlP9qCvv1JHtZIgtwrXRhWy9EsNKSiUfL5G82+Uwm6vBbjsBIU7zQilYU5awfGgY3+ZiTN182giG9qec4lg==
+"@eusoft/webapp-compiler@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@eusoft/webapp-compiler/-/webapp-compiler-0.0.18.tgz#d1d34eed1d6f4e77e66d5e738370ff4385c37727"
+  integrity sha512-87FaAOWeyHFHI8p2eNm+kdQJ2EvdiY479Wj/ZtboRhIHVtdhMUML2xDuYTB+I060kKAwl+qbtIGtQZho/0cyHw==
   dependencies:
     "@babel/parser" "7.21.8"
     "@babel/traverse" "7.21.5"
     jsdom "22.0.0"
 
-"@eusoft/webapp-core@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@eusoft/webapp-core/-/webapp-core-0.0.16.tgz#f9943014d50510e1a6619776ad08461b49a1ade9"
-  integrity sha512-MEIxXQHJLvXlQqhcI8PCCUuv3VJzz3WRf3CYxh5QsImzZ1B9ETVni1umhHxPbP3Ut4HOM4VeUMjUSXi5buomPw==
+"@eusoft/webapp-core@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@eusoft/webapp-core/-/webapp-core-0.0.17.tgz#05914711b62d8b9860424dfbe5dcb87f8f196ef9"
+  integrity sha512-HJP699CK8TvcHWbkrXB434bp8m+xBwCfg8MPka4WlBQgkP3SZixqAToGShELNwOZAaSKyAG+1fTsCV0oiH/Mcg==
 
 "@eusoft/webapp-core@link:../webapp-core":
   version "0.0.0"
   uid ""
 
-"@eusoft/webapp-jsx@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@eusoft/webapp-jsx/-/webapp-jsx-0.0.19.tgz#ca659df34adec60d5b1ff028d054461ca351998e"
-  integrity sha512-nKtztnBy29fBwkDiQz4QL1YTv9l0fHJbH3rTt6NYmEus2sey3o3q3QsIxk12otlxhGu8KPC9Gdd80eRklFupQg==
+"@eusoft/webapp-jsx@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@eusoft/webapp-jsx/-/webapp-jsx-0.0.20.tgz#700305e3b1be04771ccb6d46f61ef514278de8ff"
+  integrity sha512-Xk8IwxfOZmQLkYiNI0qQIntjYbKBiPwUwBT8k30msn8HkXMsTIVn4jBhFr14xz8O/PSG61RNLwD7a5SivSfJ0w==
   dependencies:
-    "@eusoft/webapp-core" "link:C:/Users/david/AppData/Local/Yarn/Cache/v6/npm-@eusoft-webapp-jsx-0.0.19-ca659df34adec60d5b1ff028d054461ca351998e-integrity/node_modules/@eusoft/webapp-core"
+    "@eusoft/webapp-core" "link:C:/Users/david/AppData/Local/Yarn/Cache/v6/npm-@eusoft-webapp-jsx-0.0.20-700305e3b1be04771ccb6d46f61ef514278de8ff-integrity/node_modules/@eusoft/webapp-core"
 
 "@gar/promisify@^1.1.3":
   version "1.1.3"

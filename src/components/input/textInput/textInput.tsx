@@ -13,7 +13,8 @@ const Templates = {
                        name={(m: TextInput)=> m.name}
                        value={(m: TextInput)=> m.value}
                 >
-                    <Class name="has-value" condiction={(m: TextInput) => m.value?.length > 0}/>
+                    {/*// @ts-ignore*/}
+                    <Class name="has-value" condition={(m: TextInput) => m.value?.length > 0}/>
                 </input>
                 <label
                     htmlFor={(m: TextInput)=> m.id}
