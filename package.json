@@ -13,13 +13,13 @@
     "upgrade": "pnpm up -latest"
   },
   "dependencies": {
-    "@eusoft/webapp-core": "^0.0.14",
-    "@eusoft/webapp-jsx": "^0.0.17",
+    "@eusoft/webapp-core": "^0.0.16",
+    "@eusoft/webapp-jsx": "^0.0.19",
     "@rollup/plugin-json": "^6.0.0",
     "rollup-plugin-scss": "^4.0.0"
   },
   "devDependencies": {
-    "@eusoft/webapp-compiler-rollup": "^0.0.15",
+    "@eusoft/webapp-compiler-rollup": "^0.0.17",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/react": "18.2.5",

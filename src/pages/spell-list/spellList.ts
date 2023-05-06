@@ -29,7 +29,7 @@ export class SpellList implements ITemplateProvider {
 
     public filterButton: Button;
 
-    public draggableCard: DraggableCard;
+    public draggableCards: DraggableCard[];
 
     public applyFilterTimeout: any;
 
@@ -53,7 +53,28 @@ export class SpellList implements ITemplateProvider {
         }, 500)
     }
 
+    public onCloseCard(e: Event, id: string) {
+        this.draggableCards = this.draggableCards.filter(x => x.id !== id)
+    }
+
+    public openCard(e: Event, id: string) {
+        const spell = spellStore.spells.find(x => x.id === id);
+
+        if(!spell) return;
+
+        if(this.draggableCards.find(x => x.title === spell.name)) return;
+        
+        this.draggableCards.push(
+            new DraggableCard({
+                onClose: this.onCloseCard.bind(this),
+                title: spell.name,
+                content: `${spell.fullDescription} **A livelli superiori** ${spell.atMajorLevels}`                
+            } as IDraggableCardProps)
+        )
+    }
+
     constructor(props: ISpellListProps) {
+        this.draggableCards = [];
 
         this.table = new Table({
             columns: [
@@ -63,7 +84,8 @@ export class SpellList implements ITemplateProvider {
             ] as ITableHeaderColumn[],
             rowsData: spellStore.spells,
             tableRowTemplate: 'Default',
-            template: 'Default'
+            template: 'Default',
+            onRowClick: this.openCard.bind(this)
         } as ITableProps);
 
         this.filter = {
@@ -101,11 +123,6 @@ export class SpellList implements ITemplateProvider {
             type: 'submit',
             onClick: this.applyFilter.bind(this)
         } as IButtonProps)
-
-        this.draggableCard = new DraggableCard({
-            title: 'Draggable Card',
-            content: 'Draggable Card Content'
-        } as IDraggableCardProps);
 
         this.applyFilter();
 

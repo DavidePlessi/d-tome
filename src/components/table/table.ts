@@ -13,6 +13,7 @@ export interface ITableHeaderColumn {
 }
 
 export interface ITableRowData {
+    id: string;
     [key: string]: any;
 }
 
@@ -21,6 +22,7 @@ export interface ITableProps {
     rowsData: ITableRowData[];
     tableRowTemplate: 'Default';
     template?: keyof typeof Templates;
+    onRowClick?: (e: Event, id: string) => void;
 }
 
 export class Table implements ITemplateProvider {
@@ -28,25 +30,26 @@ export class Table implements ITemplateProvider {
     rows: {value: TableRow}[];
     template: CatalogTemplate<this>;
     tableRowTemplate: 'Default';
+    onRowClick: (e: Event, id: string) => void;
 
     public updateTableRows(data: ITableRowData[]) {
-        console.log(data)
         this.rows = data.map((row) => ({
             value: new TableRow({
+                id: row.id,
                 columns: this.columns.map((column) => ({
                     value: row[column.key]
                 })),
-                template: this.tableRowTemplate
+                template: this.tableRowTemplate,
+                onRowClick: this.onRowClick
             })
         }))
-
-        console.log("Table Rows inner: " + this.rows.length)
     }
 
     constructor(props: ITableProps) {
         this.columns = props.columns;
         this.template = Templates[props.template || 'Default'];
-        this.tableRowTemplate = props.tableRowTemplate
+        this.tableRowTemplate = props.tableRowTemplate;
+        this.onRowClick = props.onRowClick;
 
         this.updateTableRows(props.rowsData);
     }

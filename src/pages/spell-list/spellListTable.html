@@ -29,6 +29,7 @@
     <div class="spell-list__table-container">
         <t:content src="$model.table"/>
     </div>
-
-    <t:content src="$model.draggableCard"/>
+    <t:foreach src="$model.draggableCards">
+        <t:content src="$model"/>
+    </t:foreach>
 </t:template>

@@ -1,5 +1,5 @@
 <t:template name="TableRow" xmlns:t="urn:web-app">
-    <tr>
+    <tr t:on-click="$model.innerOnRowClick(event)" t:id="$model.id">
         <t:foreach src="$model.columns">
             <td t:text="$model.value"></td>
         </t:foreach>
