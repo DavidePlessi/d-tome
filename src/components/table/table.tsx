@@ -1,10 +1,27 @@
-import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
-import TableTemplate from "./table.html";
+import {CatalogTemplate, ITemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import {TableRow} from "./tableRow";
 import './table.scss';
+import {Content, Foreach, Template} from "@eusoft/webapp-jsx";
 
 const Templates = {
-    Default: TableTemplate
+    Default: (
+        <Template name={'Table'}>
+            <table className="table">
+                <thead>
+                <tr>
+                    <Foreach src={(m: Table) => m.columns}>
+                        <td>{(m: ITableHeaderColumn) => m.label}</td>
+                    </Foreach>
+                </tr>
+                </thead>
+                <tbody>
+                <Foreach src={(m: Table) => m.rows}>
+                    <Content src={(m: {value: TableRow}) => m.value} />
+                </Foreach>
+                </tbody>
+            </table>
+        </Template>
+    ) as ITemplate<Table>
 }
 
 export interface ITableHeaderColumn {

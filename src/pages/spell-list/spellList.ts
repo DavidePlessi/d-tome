@@ -7,6 +7,7 @@ import './spellList.scss';
 import {ITextInputProps, TextInput} from "../../components/input/textInput/textInput";
 import {Button, IButtonProps} from "../../components/button/button";
 import {DraggableCard, IDraggableCardProps} from "../../components/draggableCard/draggableCard";
+import ISpell from "../../entities/ISpell";
 
 
 export const Templates = {
@@ -42,7 +43,7 @@ export class SpellList implements ITemplateProvider {
     }
 
     public onFilterValueChange(item: TextInput) {
-        
+
         this.filter[item.name as keyof ISpellFilter] = item.value;
 
         if(this.applyFilterTimeout)
@@ -57,18 +58,31 @@ export class SpellList implements ITemplateProvider {
         this.draggableCards = this.draggableCards.filter(x => x.id !== id)
     }
 
+    public getSpellDescription(spell: ISpell) {
+        return `**Scuola** ${spell.school}  \n` +
+        `**Tempo di lancio** ${spell.castingTime}  \n` +
+        `**Raggio d'azione** ${spell.range}  \n` +
+        `**Componenti** ${spell.components}  \n` +
+        `**Durata** ${spell.duration}  \n` +
+        `**Tiro salvezza** ${spell.savingThrow}  \n` +
+        `**Rituale** ${spell.hasRitual ? 'Si' : 'No'}  \n` +
+        `**Concentrazione** ${spell.hasConcentration ? 'Si' : 'No'}  \n\n` +
+        `${spell.fullDescription}`+
+        `${!!spell.atMajorLevels ? `\n**A livelli superiori** ${spell.atMajorLevels}` : ''}`;
+    }
+
     public openCard(e: Event, id: string) {
         const spell = spellStore.spells.find(x => x.id === id);
 
         if(!spell) return;
 
         if(this.draggableCards.find(x => x.title === spell.name)) return;
-        
+
         this.draggableCards.push(
             new DraggableCard({
                 onClose: this.onCloseCard.bind(this),
                 title: spell.name,
-                content: `${spell.fullDescription} **A livelli superiori** ${spell.atMajorLevels}`                
+                content: this.getSpellDescription(spell),
             } as IDraggableCardProps)
         )
     }

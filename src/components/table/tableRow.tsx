@@ -1,10 +1,20 @@
-import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
-import TableRowTemplate from './tableRow.html';
+import {CatalogTemplate, ITemplate, ITemplateProvider} from "@eusoft/webapp-core";
 import './tableRow.scss';
+import {Class, Foreach, Template} from "@eusoft/webapp-jsx";
+import {TextInput} from "../input/textInput/textInput";
 
 
 export const Templates = {
-    Default: TableRowTemplate
+    Default: (
+        <Template name={'TableRowTemplate'}>
+            <tr on-click={(m: TableRow, e: MouseEvent) => m.innerOnRowClick(e)} id={(m: TableRow) => m.id}>
+                <Class name="table__clickable-row" condiction={(m: TableRow) => !!m.onRowClick}/>
+                <Foreach src={(m: TableRow) => m.columns}>
+                    <td>{(m: {value: string}) => m.value}</td>
+                </Foreach>
+            </tr>
+        </Template>
+    ) as ITemplate<TableRow>
 }
 
 export interface ITableRowProps {

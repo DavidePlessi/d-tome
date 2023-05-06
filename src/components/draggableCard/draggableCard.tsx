@@ -1,32 +1,37 @@
 import {CatalogTemplate, ITemplateProvider } from "@eusoft/webapp-core";
-import DraggableCardTemplate from './draggableCard.html';
 import './draggableCard.scss';
-import {Template} from "@eusoft/webapp-jsx";
+import {Class, If, Template} from "@eusoft/webapp-jsx";
 import getRandomId from "../../utils/getRandomId";
 
-function dragElement(element: HTMLElement) {
-
-}
-
+// @ts-ignore
 const Templates = {
-    'Default': DraggableCardTemplate,
-    'DefaultJSX': (
-        <Template name="DraggableCardJSX">
+    'Default': (
+        <Template name="DraggableCard">
             <div className="draggable-card" id={(m: DraggableCard)=> m.id} behavoir={"Drag"}>
-                <div className="draggable-card__header" id={(m: DraggableCard)=> m.headerId}>
-                    <div className="draggable-card__title" text={(m: DraggableCard)=> m.title}>
-
+                <div className="draggable-card__header">
+                    <div className="draggable-card__title">
+                        {(m: DraggableCard)=> m.title}
                     </div>
                     <div className="draggable-card__actions">
                         <button
-                            className="draggable-card__action"
+                            className="draggable-card__action material-symbols-outlined"
+                            on-click={(m: DraggableCard, e: Event) => m.onMinimize(e, m.id)}
+                        > {(m: DraggableCard) => m.showContent ? 'minimize' : 'add'}
+                        </button>
+                        <button
+                            className="draggable-card__action material-symbols-outlined"
                             on-click={(m: DraggableCard, e: Event) => m.onClose(e, m.id)}
-                        > X
+                        > close
                         </button>
                     </div>
                 </div>
                 <div className="draggable-card__content">
-                    <div className="draggable-card__content-text" text={(m: DraggableCard)=> m.content}>
+                    <div className="draggable-card__content-text">
+                        {/*// @ts-ignore*/}
+                        <md-block>
+                            {(m: DraggableCard)=> m.content}
+                        {/*// @ts-ignore*/}
+                        </md-block>
                     </div>
                 </div>
             </div>
@@ -47,12 +52,20 @@ export class DraggableCard implements ITemplateProvider {
     public content: string;
     public id: string;
     public headerId: string;
+    public dragElementSelector: string;
     public onClose?: (e: Event, id: string) => void;
+    public showContent: boolean = true;
+
+
+    public onMinimize(e: Event, id: string) {
+        this.showContent = !this.showContent;
+    }
 
     constructor(props: IDraggableCardProps) {
         this.id = 'draggable-card-' + getRandomId();
         this.headerId = 'draggable-card-header-' + getRandomId();
-        this.template = Templates[props.template || 'DefaultJSX'] as CatalogTemplate<this>;
+        this.dragElementSelector = '.draggable-card__title';
+        this.template = Templates[props.template || 'Default'] as CatalogTemplate<this>;
         this.onClose = props.onClose;
 
         this.title = props.title;
