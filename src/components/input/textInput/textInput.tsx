@@ -1,27 +1,28 @@
-import {CatalogTemplate, IComponent, ITemplate, propOf} from "@eusoft/webapp-core";
+import {CatalogTemplate,  TemplateMap, propOf} from "@eusoft/webapp-core";
 import './textInput.scss';
 import getRandomId from "../../../utils/getRandomId";
 import { ITemplateProvider } from "@eusoft/webapp-core";
-import {Class, Template} from "@eusoft/webapp-jsx";
+import {Class, Template, forModel} from "@eusoft/webapp-jsx";
 
-const Templates = {
-    Default: (
+const Templates : TemplateMap<TextInput> = {
+    Default: forModel(m=>
         <Template name="TextInput">
             <div className="input__input-container">
                 <input type="text"
-                       id={(m: TextInput)=> m.id}
-                       name={(m: TextInput)=> m.name}
-                       value={(m: TextInput)=> m.value}
+                       id={m.id}
+                       name={m.name}
+                       value-pool={500}
+                       value={m.value}
                 >
                     {/*// @ts-ignore*/}
-                    <Class name="has-value" condition={(m: TextInput) => m.value?.length > 0}/>
+                    <Class name="has-value" condition={m.value?.length > 0}/>
                 </input>
                 <label
-                    htmlFor={(m: TextInput)=> m.id}
-                >{(m: TextInput)=> m.label}</label>
+                    htmlFor={m.id}
+                >{m.label}</label>
             </div>
         </Template>
-    ) as ITemplate<TextInput>
+    ) 
 }
 
 export interface ITextInputProps {

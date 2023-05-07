@@ -1,21 +1,21 @@
-import {CatalogTemplate, ITemplate, ITemplateProvider} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplate, ITemplateProvider, TemplateMap} from "@eusoft/webapp-core";
 import ButtonTemplate from "./button.html";
 import './button.scss';
 import getRandomId from "../../utils/getRandomId";
-import { Template } from "@eusoft/webapp-jsx";
+import { Template, forModel } from "@eusoft/webapp-jsx";
 
-const Templates = {
-    Default: (
+const Templates : TemplateMap<Button> = {
+    Default: forModel(m=>
         <Template name="Button">
             <button className="button"
                     behavoir="Ripple"
-                    type={(m: Button) => m.type}
-                    id={(m: Button) => m.id}
+                    type={m.type}
+                    id={m.id}
                     on-click={(m: Button, e: MouseEvent) => m.innerOnClick(e)}
-                    text={(m: Button) => m.text}
+                    text={m.text}
             ></button>
         </Template>
-    ) as ITemplate<any>
+    ) 
 }
 
 export interface IButtonProps {

@@ -1,4 +1,4 @@
-import {CatalogTemplate, ITemplate, ITemplateProvider} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplate, ITemplateProvider, TemplateMap} from "@eusoft/webapp-core";
 import ISpellFilter from "../../entities/ISpellFilter";
 import spellStore from "../../stores/spellStore";
 import {ITableHeaderColumn, ITableProps, Table} from "../../components/table/table";
@@ -8,26 +8,25 @@ import {Button, IButtonProps} from "../../components/button/button";
 import {DraggableCard, IDraggableCardProps} from "../../components/draggableCard/draggableCard";
 import ISpell from "../../entities/ISpell";
 import * as _ from "lodash";
-import {Content, Foreach, If, Template} from "@eusoft/webapp-jsx";
+import {Content, Foreach, If, Template, forModel} from "@eusoft/webapp-jsx";
 
 
-export const Templates = {
-    Default: (
-        <Template name="SpellListTable">
-            {/*// @ts-ignore*/}
+export const Templates : TemplateMap<SpellList>  = {
+    Default: forModel(m=> <Template name="SpellListTable">
+
             <form className="spell-list__filter-container" on-submit={(m: SpellList, e: Event) => m.applyFilter(e)}>
                 <div className="spell-list__filter-form">
-                    <Content src={(m: SpellList) => m.queryInput}/>
-                    <Content src={(m: SpellList) => m.levelInput}/>
-                    <Content src={(m: SpellList) => m.classesInput}/>
+                    { m.queryInput}
+                    { m.levelInput}
+                    { m.classesInput}
                 </div>
 
             </form>
             <div className="spell-list__table-container">
-                <Content src={(m: SpellList) => m.table}/>
+                {m.table}
             </div>
-            <Foreach src={(m: SpellList) => m.draggableCards}>
-                <Content src={(m: DraggableCard) => m}/>
+            <Foreach src={m.draggableCards}>
+                {i => i}
             </Foreach>
         </Template>
     ) as ITemplate<SpellList>
@@ -41,7 +40,7 @@ export class SpellList implements ITemplateProvider {
     public filter: ISpellFilter;
     public template: CatalogTemplate<this>;
 
-    public table: Table;
+    public table: Table<ISpell>;
 
     public queryInput: TextInput;
     public levelInput: TextInput;
@@ -59,33 +58,22 @@ export class SpellList implements ITemplateProvider {
             event.preventDefault();
         let result = spellStore.filterSpells(spellStore.spells, this.filter);
 
-        if(this.table.activeSorts.length > 0) {
-            result = _.orderBy(
-                result,
-                this.table.activeSorts.map(x => x.key),
-                this.table.activeSorts.map(x => x.sort),
-            );
-        }
-
-
         this.table.updateTableRows(result);
     }
 
     public onFilterValueChange(item: TextInput) {
-
+         
         this.filter[item.name as keyof ISpellFilter] = item.value;
-
+        this.applyFilter();
+    /*
         if(this.applyFilterTimeout)
             clearTimeout(this.applyFilterTimeout);
 
         this.applyFilterTimeout = setTimeout(() => {
             this.applyFilter();
-        }, 500)
+        }, 500)*/
     }
 
-    public onSort(e: Event, column: ITableHeaderColumn) {
-        this.applyFilter()
-    }
 
     public onCloseCard(e: Event, id: string) {
         this.draggableCards = this.draggableCards.filter(x => x.id !== id)
@@ -128,17 +116,17 @@ export class SpellList implements ITemplateProvider {
     constructor(props: ISpellListProps) {
         this.draggableCards = [];
 
-        this.table = new Table({
+        this.table = new Table<ISpell>({
             columns: [
-                {label: 'Nome', key: 'name', onSort: this.onSort.bind(this), currentSort: "none"},
-                {label: 'Livello', key: 'level', onSort: this.onSort.bind(this), currentSort: "none"},
-                {label: 'Classi', key: 'classes', onSort: this.onSort.bind(this), currentSort: "none"}
-            ] as ITableHeaderColumn[],
+                {label: 'Nome', key: 'name',  currentSort: "none"},
+                {label: 'Livello', key: 'level', currentSort: "none"},
+                {label: 'Classi', key: 'classes',  currentSort: "none"}
+            ],
             rowsData: spellStore.spells,
             tableRowTemplate: 'Default',
             template: 'Default',
             onRowClick: this.openCard.bind(this)
-        } as ITableProps);
+        });
 
         this.filter = {
             query: '',

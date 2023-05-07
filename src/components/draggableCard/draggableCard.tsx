@@ -1,25 +1,24 @@
-import {CatalogTemplate, ITemplateProvider } from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplateProvider, TemplateMap } from "@eusoft/webapp-core";
 import './draggableCard.scss';
-import {Class, If, Template} from "@eusoft/webapp-jsx";
+import {Class, If, Template, forModel } from "@eusoft/webapp-jsx";
 import getRandomId from "../../utils/getRandomId";
 
 // @ts-ignore
 // @ts-ignore
-const Templates = {
-    'Default': (
-        <Template name="DraggableCard">
-            <div className="draggable-card" id={(m: DraggableCard)=> m.id} behavoir={"Drag"}>
+const Templates : TemplateMap<DraggableCard> = {
+    'Default': forModel(m => <Template name="DraggableCard">
+            <div className="draggable-card" id={m.id} behavoir={"Drag"}>
                 {/*// @ts-ignore*/}
-                <Class name="draggable-card--minimized" condition={(m: DraggableCard) => !m.showContent}/>
+                <Class name="draggable-card--minimized" condition={!m.showContent}/>
                 <div className="draggable-card__header">
                     <div className="draggable-card__title">
-                        {(m: DraggableCard)=> m.title}
+                        {m.title}
                     </div>
                     <div className="draggable-card__actions">
                         <button
                             className="draggable-card__action material-symbols-outlined"
                             on-click={(m: DraggableCard, e: Event) => m.onMinimize(e, m.id)}
-                        > {(m: DraggableCard) => m.showContent ? 'minimize' : 'add'}
+                        > {m.showContent ? 'minimize' : 'add'}
                         </button>
                         <button
                             className="draggable-card__action material-symbols-outlined"
@@ -30,11 +29,11 @@ const Templates = {
                 </div>
                 <div className="draggable-card__content">
                     {/*// @ts-ignore*/}
-                    <If condition={(m: DraggableCard) => m.showContent}>
+                    <If condition={m.showContent}>
                         <div className="draggable-card__content-text">
                             {/*// @ts-ignore*/}
                             <md-block>
-                                {(m: DraggableCard)=> m.content}
+                                {m.content}
                                 {/*// @ts-ignore*/}
                             </md-block>
                         </div>
