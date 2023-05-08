@@ -179,3 +179,6 @@ About
 /.idea/modules.xml
 /.idea/watcherTasks.xml
 /.rollup.cache/
+/.vscode/
+/.idea/
+
