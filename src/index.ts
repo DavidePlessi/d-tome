@@ -3,6 +3,8 @@ import Index from "./index.html";
 import {Appbar} from "./components/appbar/appbar";
 import {SpellList} from "./pages/spell-list/spellList";
 import './index.scss';
+import './components/behaviour/dargBehaviour';
+import './components/behaviour/rippleBehaviour';
 
 
 interface IIndexModelProps {

@@ -1,10 +1,21 @@
-import {CatalogTemplate, ITemplateProvider} from "@eusoft/webapp-core";
+import {CatalogTemplate, ITemplate, ITemplateProvider, TemplateMap} from "@eusoft/webapp-core";
 import ButtonTemplate from "./button.html";
 import './button.scss';
 import getRandomId from "../../utils/getRandomId";
+import { Template, forModel } from "@eusoft/webapp-jsx";
 
-const Templates = {
-    Default: ButtonTemplate
+const Templates : TemplateMap<Button> = {
+    Default: forModel(m=>
+        <Template name="Button">
+            <button className="button"
+                    behavoir="Ripple"
+                    type={m.type}
+                    id={m.id}
+                    on-click={(m: Button, e: MouseEvent) => m.innerOnClick(e)}
+                    text={m.text}
+            ></button>
+        </Template>
+    ) 
 }
 
 export interface IButtonProps {
@@ -23,25 +34,8 @@ export class Button implements ITemplateProvider {
     public template: CatalogTemplate<this>
 
     innerOnClick(e: MouseEvent) {
-        const button = e.currentTarget as HTMLButtonElement;
-        const circle = document.createElement("span");
-        const diameter = Math.max(button.clientWidth, button.clientHeight);
-        const radius = diameter / 2;
-
-        circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${e.clientX - (button.offsetLeft + radius)}px`;
-        circle.style.top = `${e.clientY - (button.offsetTop + radius)}px`;
-        circle.classList.add("ripple");
-
-        const ripple = button.getElementsByClassName("ripple")[0];
-        if (ripple) {
-            ripple.remove();
-        }
-
-        button.appendChild(circle);
-
-        this.onClick(e);
-
+        if(this.onClick)
+            this.onClick(e);
     }
 
     constructor(props: IButtonProps) {

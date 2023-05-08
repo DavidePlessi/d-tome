@@ -1,4 +1,5 @@
 export default interface ISpell {
+    id: string;
     index: number;
     name: string;
     originalName: string;

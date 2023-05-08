@@ -5,6 +5,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import webapp from "@eusoft/webapp-compiler-rollup";
 import scss from "rollup-plugin-scss";
 import path from "path";
+import commonjs from "@rollup/plugin-commonjs";
 
 const outPath = "public/build";
 
@@ -24,6 +25,13 @@ export default [
     plugins: [
       webapp(),
       scss({ fileName: 'style.css' }),
+      commonjs({
+        include: /node_modules/,
+        namedExports: {
+          'node_modules/lodash/index.js': ['get'],
+        }
+      }),
+
       json(),
       resolve(),
       typescript(),
